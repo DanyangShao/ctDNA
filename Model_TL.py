@@ -299,7 +299,7 @@ for trainval_idx, test_idx in skf.split(X_all, y_all_idx):
                 "Classifier": y_val
             }
         ),
-        epochs=50,
+        epochs=200,
         batch_size=32,
         callbacks=[early_stop_stage1],
         verbose=0
@@ -308,8 +308,14 @@ for trainval_idx, test_idx in skf.split(X_all, y_all_idx):
     # =====================================================
     # Stage 2: Fine-tune full network
     # =====================================================
-    for layer in model.layers:
-        layer.trainable = True
+    for layer in encoder.layers:
+    layer.trainable = True
+
+    for layer in decoder.layers:
+    layer.trainable = True
+
+    for layer in classifier.layers:
+    layer.trainable = True
 
     model.compile(
         optimizer=Adam(1e-5),
@@ -341,7 +347,7 @@ for trainval_idx, test_idx in skf.split(X_all, y_all_idx):
                 "Classifier": y_val
             }
         ),
-        epochs=70,
+        epochs=200,
         batch_size=32,
         callbacks=[early_stop_stage2],
         verbose=0
