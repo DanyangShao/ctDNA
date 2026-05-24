@@ -282,7 +282,7 @@ for trainval_idx, test_idx in skf.split(X_all, y_all_idx):
 
     early_stop_stage1 = EarlyStopping(
         monitor="val_loss",
-        patience=20,
+        patience=120,
         restore_best_weights=True
     )
 
@@ -324,7 +324,7 @@ for trainval_idx, test_idx in skf.split(X_all, y_all_idx):
 
     early_stop_stage2 = EarlyStopping(
         monitor="val_loss",
-        patience=20,
+        patience=120,
         restore_best_weights=True
     )
 
